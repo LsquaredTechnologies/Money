@@ -16,6 +16,18 @@ namespace Lsquared.Extensions
     public partial struct Currency
     {
         /// <summary>
+        /// Gets the currenct currency.
+        /// </summary>
+        /// <value>
+        /// The currenct currency.
+        /// </value>
+#if CODE_ANALYSIS
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
+        public static Currency CurrentCurrency
+            => FromCulture(CultureInfo.CurrentCulture);
+
+        /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>
@@ -68,18 +80,6 @@ namespace Lsquared.Extensions
         }
 
         /// <summary>
-        /// Get the defined currency from the current culture.
-        /// </summary>
-        /// <returns>
-        /// An instance of <see cref="Currency"/> representing the current culture currency.
-        /// </returns>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        public static Currency FromCurrentCulture()
-        {
-            return FromCulture(CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>
         /// Get the defined currency from the specified culture.
         /// </summary>
         /// <param name="culture">The culture information.</param>
@@ -90,7 +90,7 @@ namespace Lsquared.Extensions
         public static Currency FromCulture(CultureInfo culture)
         {
             short isoNumber;
-            if (_lcidToIsoNumber.TryGetValue(culture.LCID, out isoNumber))
+            if (_nameToIsoNumber.TryGetValue(culture.Name, out isoNumber))
             {
                 return new Currency(isoNumber);
             }
@@ -109,7 +109,7 @@ namespace Lsquared.Extensions
         public static Currency Parse(string isoCodeOrSymbol)
         {
             Currency currency;
-            if (TryParse(isoCodeOrSymbol, Thread.CurrentThread.CurrentCulture, out currency))
+            if (TryParse(isoCodeOrSymbol, CultureInfo.CurrentCulture, out currency))
                 return currency;
 
             throw new FormatException($"Cannot parse currency: {isoCodeOrSymbol}");
@@ -143,7 +143,7 @@ namespace Lsquared.Extensions
         /// </returns>
         public static bool TryParse(string isoCodeOrSymbol, out Currency currency)
         {
-            return TryParse(isoCodeOrSymbol, Thread.CurrentThread.CurrentCulture, out currency);
+            return TryParse(isoCodeOrSymbol, CultureInfo.CurrentCulture, out currency);
         }
 
         /// <summary>
@@ -169,8 +169,8 @@ namespace Lsquared.Extensions
             List<short> isoNumbers;
             if (_symbolToIsoNumbers.TryGetValue(isoCodeOrSymbol, out isoNumbers)) // _symbolIndex
             {
-                var lcid = culture.LCID;
-                if (_lcidToIsoNumber.TryGetValue(lcid, out isoNumber) && // _lcidToIsoCodeLookup
+                var cultureName = culture.Name;
+                if (_nameToIsoNumber.TryGetValue(cultureName, out isoNumber) && // _lcidToIsoCodeLookup
                     !isoNumbers.Contains(isoNumber))
                 {
                     isoNumber = isoNumbers[0];
@@ -187,7 +187,9 @@ namespace Lsquared.Extensions
         public override string ToString()
             => $"{Name} ({_isoNumber})";
 
+#if CODE_ANALYSIS
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         private static Entry FindEntry(short code)
         {
             Entry entry;

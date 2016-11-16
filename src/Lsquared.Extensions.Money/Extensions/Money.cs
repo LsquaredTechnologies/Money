@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using System.Threading;
 
 namespace Lsquared.Extensions
 {
@@ -52,7 +51,9 @@ namespace Lsquared.Extensions
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="currency">The currency.</param>
+#if CODE_ANALYSIS
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public Money(long value, Currency currency)
         {
             _value = Convert.ToDecimal(value);
@@ -81,7 +82,7 @@ namespace Lsquared.Extensions
         public static Money Parse(string value)
         {
             Money money;
-            if (TryParse(value, Thread.CurrentThread.CurrentCulture, out money))
+            if (TryParse(value, CultureInfo.CurrentCulture, out money))
                 return money;
 
             throw new FormatException($"Cannot parse money: {value}");
@@ -113,10 +114,12 @@ namespace Lsquared.Extensions
         /// <returns>
         ///   <c>true</c> if the value can be parsed; otherwise, <c>false</c>.
         /// </returns>
+#if CODE_ANALYSIS
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool TryParse(string value, out Money money)
         {
-            return TryParse(value, Thread.CurrentThread.CurrentCulture, out money);
+            return TryParse(value, CultureInfo.CurrentCulture, out money);
         }
 
         /// <summary>

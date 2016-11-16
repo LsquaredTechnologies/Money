@@ -8,7 +8,9 @@ namespace Lsquared.Extensions
     partial struct Money : IEquatable<Money>
     {
         /// <inheritdoc />
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public override int GetHashCode()
         {
             unchecked
@@ -28,7 +30,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public bool Equals(Money other)
             => Equals(this, other);
 
@@ -51,7 +55,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator ==(Money left, Money right)
             => Equals(left, right);
 
@@ -63,7 +69,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator !=(Money left, Money right)
             => Equals(left, right);
     }

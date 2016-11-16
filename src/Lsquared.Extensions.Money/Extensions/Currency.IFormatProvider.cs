@@ -14,13 +14,13 @@ namespace Lsquared.Extensions
             if (typeof(NumberFormatInfo) != formatType)
                 return null;
 
-            var lcids = _isoNumberToLcid[_isoNumber];
+            var names = _isoNumberToName[_isoNumber];
 
-            var lcid = lcids.Contains(CultureInfo.CurrentCulture.LCID) ?
-                             CultureInfo.CurrentCulture.LCID : 
-                             lcids[0];
+            var name = names.Contains(CultureInfo.CurrentCulture.Name) ?
+                             CultureInfo.CurrentCulture.Name : 
+                             names[0];
 
-            return new CultureInfo(lcid).NumberFormat;
+            return new CultureInfo(name).NumberFormat;
         }
     }
 }

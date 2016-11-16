@@ -26,7 +26,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator +(Money value)
         {
             return value;
@@ -40,7 +42,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator +(Money left, Money right)
         {
             return Add(left, right);
@@ -54,7 +58,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator +(Money left, int right)
         {
             return Add(left, right);
@@ -68,7 +74,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator +(Money left, long right)
         {
             return Add(left, right);
@@ -82,7 +90,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator +(Money left, decimal right)
         {
             return Add(left, right);
@@ -96,7 +106,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator -(Money left, Money right)
         {
             return Subtract(left, right);
@@ -110,7 +122,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator -(Money left, int right)
         {
             return Subtract(left, right);
@@ -124,7 +138,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator -(Money left, long right)
         {
             return Subtract(left, right);
@@ -138,7 +154,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator -(Money left, decimal right)
         {
             return Subtract(left, right);
@@ -152,7 +170,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator *(Money left, int right)
         {
             return Multiply(left, right);
@@ -166,7 +186,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator *(Money left, long right)
         {
             return Multiply(left, right);
@@ -180,7 +202,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator *(Money left, decimal right)
         {
             return Multiply(left, right);
@@ -194,7 +218,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator /(Money left, int right)
         {
             return Divide(left, right);
@@ -208,7 +234,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator /(Money left, long right)
         {
             return Divide(left, right);
@@ -222,7 +250,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static Money operator /(Money left, decimal right)
         {
             return Divide(left, right);

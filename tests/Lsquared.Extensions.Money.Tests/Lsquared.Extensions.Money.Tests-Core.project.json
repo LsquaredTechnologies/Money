@@ -1,0 +1,38 @@
+{
+    "version": "1.0.0-*",
+    "testRunner": "xunit",
+    "dependencies": {
+        "xunit": "2.2.0-beta3-build3402",
+        "dotnet-test-xunit": "2.2.0-preview2-build1029",
+        "Lsquared.Extensions.Money": "1.0.0-*"
+    },
+    "frameworks": {
+        "net45": {
+            "dependencies": {
+            }
+        },
+        "net452": {
+            "dependencies": {
+            }
+        },
+        "net461": {
+            "dependencies": {
+            }
+        },
+        "netcoreapp1.0": {
+            "imports": "dnxcore50",
+            "dependencies": {
+                "NETStandard.Library": "1.6.0"
+            }
+        }
+    },
+    "buildOptions": {
+        "define": [ "XUNIT" ],
+        "copyToOutput": {
+            "include": [ "xunit.runner.json" ]
+        }
+    },
+    "runtimes": {
+        "win10-x64": {}
+    }
+}

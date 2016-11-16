@@ -1,7 +1,16 @@
 ﻿using System;
 using System.Globalization;
+
+#if !(NETSTANDARD1_6 && NETCOREAPP1_0)
 using System.Threading;
+#endif
+
+#if XUNIT
+using Xunit;
+#else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = Xunit.Assert;
+#endif
 
 namespace Lsquared.Extensions.Tests
 {
@@ -15,7 +24,7 @@ namespace Lsquared.Extensions.Tests
 
             var value = new Money(12.35m, Currency.EUR);
 
-            Assert.AreEqual(12.35m, value.Value);
+            Assert.Equal(12.35m, value.Value);
         }
 
         [TestMethod]
@@ -27,8 +36,8 @@ namespace Lsquared.Extensions.Tests
             var b = new Money(12.35m, Currency.EUR);
             var actual = a + b;
 
-            Assert.AreEqual(24.70m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.70m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -39,8 +48,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a + 0;
 
-            Assert.AreEqual(12.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(12.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -51,8 +60,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = 0 + a;
 
-            Assert.AreEqual(12.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(12.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -63,8 +72,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a + 12;
 
-            Assert.AreEqual(24.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -75,8 +84,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a + 12L;
 
-            Assert.AreEqual(24.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -87,12 +96,11 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a + 12.35m;
 
-            Assert.AreEqual(24.70m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.70m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Add_DifferenctCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -100,7 +108,7 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var b = new Money(12.35m, Currency.GBP);
 
-            var actual = a + b;
+            Assert.Throws<InvalidOperationException>(() => a + b);
         }
 
         [TestMethod]
@@ -112,8 +120,8 @@ namespace Lsquared.Extensions.Tests
             var b = new Money(12.35m, Currency.EUR);
             var actual = a - b;
 
-            Assert.AreEqual(0, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(0, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -124,8 +132,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a - 0;
 
-            Assert.AreEqual(12.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(12.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -136,8 +144,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = 0 - a;
 
-            Assert.AreEqual(-12.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(-12.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -148,8 +156,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a - 12;
 
-            Assert.AreEqual(0.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(0.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -160,8 +168,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a - 12L;
 
-            Assert.AreEqual(0.35m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(0.35m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -172,19 +180,19 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a - 12.35m;
 
-            Assert.AreEqual(0, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(0, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Subtract_DifferenctCurrencies()
         {
             // Don't need to set culture in current thread.
 
             var a = new Money(12.35m, Currency.EUR);
             var b = new Money(12.35m, Currency.GBP);
-            var actual = a - b;
+
+            Assert.Throws<InvalidOperationException>(() => a - b);
         }
 
         [TestMethod]
@@ -195,8 +203,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a * 2;
 
-            Assert.AreEqual(24.70m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.70m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -207,8 +215,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a * 2L;
 
-            Assert.AreEqual(24.70m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.70m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -219,8 +227,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a * 2m;
 
-            Assert.AreEqual(24.70m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(24.70m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -231,8 +239,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a / 2;
 
-            Assert.AreEqual(6.175m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(6.175m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -243,8 +251,8 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a / 2L;
 
-            Assert.AreEqual(6.175m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(6.175m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
@@ -255,36 +263,32 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var actual = a / 2m;
 
-            Assert.AreEqual(6.175m, actual.Value);
-            Assert.AreEqual(Currency.EUR, actual.Currency);
+            Assert.Equal(6.175m, actual.Value);
+            Assert.Equal(Currency.EUR, actual.Currency);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void Parse_WithBadValue()
         {
-            Money.Parse("ABC");
+            Assert.Throws<FormatException>(() => Money.Parse("ABC"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void Parse_WithNull()
         {
-            Money.Parse(null);
+            Assert.Throws<FormatException>(() => Money.Parse(null));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void Parse_WithEmptyString()
         {
-            Money.Parse(string.Empty);
+            Assert.Throws<FormatException>(() => Money.Parse(string.Empty));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void Parse_WithBadValueAndCultureInfo()
         {
-            Money.Parse("ABC", new CultureInfo("fr-FR"));
+            Assert.Throws<FormatException>(() => Money.Parse("ABC", new CultureInfo("fr-FR")));
         }
 
         [TestMethod]
@@ -292,8 +296,8 @@ namespace Lsquared.Extensions.Tests
         {
             var money = Money.Parse("3,23 €", new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(3.23m, money.Value);
-            Assert.AreEqual(Currency.EUR, money.Currency);
+            Assert.Equal(3.23m, money.Value);
+            Assert.Equal(Currency.EUR, money.Currency);
         }
 
         [TestMethod]
@@ -301,8 +305,8 @@ namespace Lsquared.Extensions.Tests
         {
             var money = Money.Parse("£3.23", new CultureInfo("en-GB"));
 
-            Assert.AreEqual(3.23m, money.Value);
-            Assert.AreEqual(Currency.GBP, money.Currency);
+            Assert.Equal(3.23m, money.Value);
+            Assert.Equal(Currency.GBP, money.Currency);
         }
 
         [TestMethod]
@@ -310,18 +314,17 @@ namespace Lsquared.Extensions.Tests
         {
             var money = Money.Parse("$3.23", new CultureInfo("en-US"));
 
-            Assert.AreEqual(3.23m, money.Value);
-            Assert.AreEqual(Currency.USD, money.Currency);
+            Assert.Equal(3.23m, money.Value);
+            Assert.Equal(Currency.USD, money.Currency);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void CompareTo_WithObject()
         {
             // Don't need to set culture in current thread.
 
             var a = new Money(12.35m, Currency.EUR);
-            a.CompareTo(new object());
+            Assert.Throws<NotSupportedException>(() => a.CompareTo(new object()));
         }
 
         [TestMethod]
@@ -331,10 +334,9 @@ namespace Lsquared.Extensions.Tests
 
             var a = new Money(12.35m, Currency.EUR);
             var b = new Money(12.35m, Currency.EUR);
-
             var actual = a.CompareTo((object)b);
 
-            Assert.AreEqual(0, actual);
+            Assert.Equal(0, actual);
         }
 
         [TestMethod]
@@ -347,11 +349,10 @@ namespace Lsquared.Extensions.Tests
 
             var actual = a.CompareTo(b);
 
-            Assert.AreEqual(0, actual);
+            Assert.Equal(0, actual);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void CompareTo_WithDifferentCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -359,7 +360,7 @@ namespace Lsquared.Extensions.Tests
             var a = new Money(12.35m, Currency.EUR);
             var b = new Money(12.35m, Currency.USD);
 
-            a.CompareTo(b);
+            Assert.Throws<InvalidOperationException>(() => a.CompareTo(b));
         }
 
         [TestMethod]
@@ -370,7 +371,7 @@ namespace Lsquared.Extensions.Tests
             var money = new Money(12.35m, Currency.EUR);
             var actual = money.Equals(new object());
 
-            Assert.AreEqual(false, actual);
+            Assert.Equal(false, actual);
         }
 
         [TestMethod]
@@ -383,7 +384,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money1.Equals((object)money2);
 
-            Assert.AreEqual(true, actual);
+            Assert.Equal(true, actual);
         }
 
         [TestMethod]
@@ -396,7 +397,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money1.Equals(money2);
 
-            Assert.AreEqual(true, actual);
+            Assert.Equal(true, actual);
         }
 
         [TestMethod]
@@ -409,7 +410,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money1.Equals(money2);
 
-            Assert.AreEqual(false, actual);
+            Assert.Equal(false, actual);
         }
 
         [TestMethod]
@@ -421,18 +422,17 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToString("C", Currency.EUR);
 
-            Assert.AreEqual("12,35 €", actual);
+            Assert.Equal("12,35 €", actual);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void ToBoolean()
         {
             // Don't need to set culture in current thread.
 
             var money = new Money(12.35m, Currency.EUR);
 
-            money.ToBoolean(new CultureInfo("fr-FR"));
+            Assert.Throws<NotSupportedException>(() => money.ToBoolean(new CultureInfo("fr-FR")));
         }
 
         [TestMethod]
@@ -444,29 +444,27 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToByte(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12, actual);
+            Assert.Equal(12, actual);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void ToChar()
         {
             // Don't need to set culture in current thread.
 
             var money = new Money(12.35m, Currency.EUR);
 
-            money.ToChar(new CultureInfo("fr-FR"));
+            Assert.Throws<NotSupportedException>(() => money.ToChar(new CultureInfo("fr-FR")));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void ToDateTime()
         {
             // Don't need to set culture in current thread.
 
             var money = new Money(12.35m, Currency.EUR);
 
-            money.ToDateTime(new CultureInfo("fr-FR"));
+            Assert.Throws<NotSupportedException>(() => money.ToDateTime(new CultureInfo("fr-FR")));
         }
 
         [TestMethod]
@@ -478,7 +476,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToDecimal(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12.35m, actual);
+            Assert.Equal(12.35m, actual);
         }
 
         [TestMethod]
@@ -490,7 +488,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToDouble(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12.35, actual);
+            Assert.Equal(12.35, actual);
         }
 
         [TestMethod]
@@ -502,7 +500,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToInt16(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12, actual);
+            Assert.Equal(12, actual);
         }
 
         [TestMethod]
@@ -514,7 +512,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToInt32(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12, actual);
+            Assert.Equal(12, actual);
         }
 
         [TestMethod]
@@ -526,7 +524,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToInt64(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12, actual);
+            Assert.Equal(12, actual);
         }
 
         [TestMethod]
@@ -538,7 +536,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToSByte(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12, actual);
+            Assert.Equal(12, actual);
         }
 
         [TestMethod]
@@ -550,18 +548,17 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToSingle(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12.35f, actual);
+            Assert.Equal(12.35f, actual);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void ToType()
         {
             // Don't need to set culture in current thread.
 
             var money = new Money(12.35m, Currency.EUR);
 
-            money.ToType(typeof(object), new CultureInfo("fr-FR"));
+            Assert.Throws<NotSupportedException>(() => money.ToType(typeof(object), new CultureInfo("fr-FR")));
         }
 
         [TestMethod]
@@ -573,7 +570,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToUInt16(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12U, actual);
+            Assert.Equal(12U, actual);
         }
 
         [TestMethod]
@@ -585,7 +582,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToUInt32(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12U, actual);
+            Assert.Equal(12U, actual);
         }
 
         [TestMethod]
@@ -597,7 +594,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.ToUInt64(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(12UL, actual);
+            Assert.Equal(12UL, actual);
         }
 
         [TestMethod]
@@ -609,7 +606,7 @@ namespace Lsquared.Extensions.Tests
 
             var actual = money.GetTypeCode();
 
-            Assert.AreEqual(TypeCode.Object, actual);
+            Assert.Equal(TypeCode.Object, actual);
         }
     }
 }

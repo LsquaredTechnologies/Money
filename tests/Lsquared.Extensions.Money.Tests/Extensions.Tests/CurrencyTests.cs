@@ -1,6 +1,15 @@
 ﻿using System.Globalization;
+
+#if !(NETSTANDARD1_6 && NETCOREAPP1_0)
 using System.Threading;
+#endif
+
+#if XUNIT
+using Xunit;
+#else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = Xunit.Assert;
+#endif
 
 namespace Lsquared.Extensions.Tests
 {
@@ -14,7 +23,7 @@ namespace Lsquared.Extensions.Tests
 
             var euro = new Currency(978);
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
@@ -24,7 +33,7 @@ namespace Lsquared.Extensions.Tests
 
             var euro = new Currency("EUR");
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
@@ -34,57 +43,77 @@ namespace Lsquared.Extensions.Tests
 
             var euro = new Currency("€");
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
         public void Parse_EuroName_WithFrenchCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+#endif
 
             var euro = Currency.Parse("EUR");
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
         public void Parse_EuroSymbol_WithSpanishCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("es-ES");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES");
+#endif
 
             var euro = Currency.Parse("€");
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
         public void Parse_DollarSymbol_WithAmericanCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+#endif
 
             var dollar = Currency.Parse("$");
 
-            Assert.AreEqual(Currency.USD, dollar);
+            Assert.Equal(Currency.USD, dollar);
         }
 
         [TestMethod]
         public void Parse_DollarSymbol_WithEnglishCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("en-GB");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+#endif
 
             var dollar = Currency.Parse("$");
 
-            Assert.AreEqual(Currency.ARS, dollar); // ! \\ Currency is the first one found if no currency matches the current culture...
+            Assert.Equal(Currency.ARS, dollar); // ! \\ Currency is the first one found if no currency matches the current culture...
         }
 
         [TestMethod]
         public void Parse_SterlingPoundSymbol_WithEnglishCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("en-GB");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+#endif
 
             var pound = Currency.Parse("£");
 
-            Assert.AreEqual(Currency.GBP, pound);
+            Assert.Equal(Currency.GBP, pound);
         }
 
         [TestMethod]
@@ -92,7 +121,7 @@ namespace Lsquared.Extensions.Tests
         {
             var euro = new Currency(978);
 
-            Assert.AreEqual("Euro (978)", euro.ToString());
+            Assert.Equal("Euro (978)", euro.ToString());
         }
 
         [TestMethod]
@@ -100,7 +129,7 @@ namespace Lsquared.Extensions.Tests
         {
             var lira = new Currency(949);
 
-            Assert.AreEqual("Türk Lirası (949)", lira.ToString());
+            Assert.Equal("Türk Lirası (949)", lira.ToString());
         }
 
         [TestMethod]
@@ -108,7 +137,7 @@ namespace Lsquared.Extensions.Tests
         {
             var euro = Currency.FromCulture(new CultureInfo("fr-FR"));
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
@@ -116,7 +145,7 @@ namespace Lsquared.Extensions.Tests
         {
             var euro = Currency.FromCulture(new CultureInfo("es-ES"));
 
-            Assert.AreEqual(Currency.EUR, euro);
+            Assert.Equal(Currency.EUR, euro);
         }
 
         [TestMethod]
@@ -124,7 +153,7 @@ namespace Lsquared.Extensions.Tests
         {
             var pound = Currency.FromCulture(new CultureInfo("en-GB"));
 
-            Assert.AreEqual(Currency.GBP, pound);
+            Assert.Equal(Currency.GBP, pound);
         }
 
         [TestMethod]
@@ -132,29 +161,37 @@ namespace Lsquared.Extensions.Tests
         {
             var dollar = Currency.FromCulture(new CultureInfo("en-US"));
 
-            Assert.AreEqual(Currency.USD, dollar);
+            Assert.Equal(Currency.USD, dollar);
         }
 
         [TestMethod]
         public void GetFormat_WithFrenchCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+#endif
 
             var euro = Currency.EUR;
             var actual = 12.35.ToString("C", euro);
 
-            Assert.AreEqual("12,35 €", actual);
+            Assert.Equal("12,35 €", actual);
         }
 
         [TestMethod]
         public void GetFormat_WithAmericanCulture()
         {
+#if NETSTANDARD1_6 || NETCOREAPP1_0
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+#endif
 
-            var dollar = Currency.FromCurrentCulture();
+            var dollar = Currency.CurrentCurrency;
             var actual = 12.35.ToString("C", dollar);
 
-            Assert.AreEqual("$12.35", actual);
+            Assert.Equal("$12.35", actual);
         }
     }
 }

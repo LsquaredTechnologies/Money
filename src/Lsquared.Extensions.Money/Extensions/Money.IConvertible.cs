@@ -5,7 +5,11 @@ namespace Lsquared.Extensions
     /// <content>
     /// Implements IConvertible interface.
     /// </content>
+#if PORTABLE
+    partial struct Money
+#else
     partial struct Money : IConvertible
+#endif
     {
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.Int32"/> to <see cref="Money"/>.
@@ -14,7 +18,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the conversion.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static implicit operator Money(int value)
         {
             return new Money(value, Currency.None);
@@ -27,7 +33,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the conversion.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static implicit operator Money(long value)
         {
             return new Money(value, Currency.None);
@@ -40,7 +48,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the conversion.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static explicit operator Money(decimal value)
         {
             return new Money(value, Currency.None);
@@ -53,17 +63,20 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the conversion.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static implicit operator decimal(Money money)
         {
             return money.Value;
         }
-
+#if !PORTABLE
         /// <inheritdoc />
         public TypeCode GetTypeCode()
         {
             return TypeCode.Object;
         }
+#endif
 
         /// <inheritdoc />
         public bool ToBoolean(IFormatProvider provider)

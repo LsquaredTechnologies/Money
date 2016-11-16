@@ -9,7 +9,9 @@ namespace Lsquared.Extensions
     partial struct Money : IFormattable
     {
         /// <inheritdoc />
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public override string ToString()
         {
             return ToString("C", (IFormatProvider)_currency ?? NumberFormatInfo.CurrentInfo);
@@ -22,7 +24,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public string ToString(string format)
         {
             return ToString(format, (IFormatProvider)_currency ?? NumberFormatInfo.CurrentInfo);
@@ -35,7 +39,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public string ToString(IFormatProvider provider)
         {
             return ToString("C", provider ?? _currency);

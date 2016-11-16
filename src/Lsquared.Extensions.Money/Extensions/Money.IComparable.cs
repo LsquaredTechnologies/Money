@@ -30,7 +30,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public int CompareTo(Money other)
         {
             return Compare(this, other);
@@ -58,7 +60,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator >(Money left, Money right)
         {
             return Compare(left, right) > 0;
@@ -72,7 +76,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator <(Money left, Money right)
         {
             return Compare(left, right) < 0;
@@ -86,7 +92,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator >=(Money left, Money right)
         {
             return Compare(left, right) >= 0;
@@ -100,7 +108,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator <=(Money left, Money right)
         {
             return Compare(left, right) <= 0;

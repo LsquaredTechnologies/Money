@@ -1,0 +1,15 @@
+﻿{
+    "dependencies": {
+    },
+    "frameworks": {
+        "net45": {},
+        "net451": {},
+        "net452": {},
+        "net46": {},
+        "net461": {}
+    },
+    "runtimes": {
+        "win": {},
+        "win10": {}
+    }
+}

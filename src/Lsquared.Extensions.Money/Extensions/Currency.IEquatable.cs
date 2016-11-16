@@ -8,17 +8,23 @@ namespace Lsquared.Extensions
     partial struct Currency : IEquatable<Currency>
     {
         /// <inheritdoc />
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public override int GetHashCode()
             => 609502847 ^ _isoNumber;
 
         /// <inheritdoc />
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public override bool Equals(object obj)
             => obj is Currency && Equals(this, (Currency)obj);
 
         /// <inheritdoc />
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public bool Equals(Currency other)
             => Equals(this, other);
 
@@ -41,7 +47,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator ==(Currency left, Currency right)
             => Equals(left, right);
 
@@ -53,7 +61,9 @@ namespace Lsquared.Extensions
         /// <returns>
         /// The result of the operator.
         /// </returns>
+#if !(PORTABLE || NETFX_CORE || NETSTANDARD)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         public static bool operator !=(Currency left, Currency right)
             => !Equals(left, right);
     }
