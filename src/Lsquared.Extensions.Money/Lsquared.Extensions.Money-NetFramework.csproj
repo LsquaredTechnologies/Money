@@ -30,12 +30,14 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Debug\net45\Lsquared.Extensions.Money.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Release\net45\Lsquared.Extensions.Money.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);TRACE;NET;$(TargetFramework.ToUpper())</DefineConstants>

@@ -35,12 +35,14 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Debug\netstandard1.3\Lsquared.Extensions.Money.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Release\netstandard1.3\Lsquared.Extensions.Money.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);TRACE;NETSTANDARD;$(TargetFramework.Replace('.', '_').ToUpper())</DefineConstants>
