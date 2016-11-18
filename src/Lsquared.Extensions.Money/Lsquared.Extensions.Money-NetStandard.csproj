@@ -43,7 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);TRACE;NETSTANDARD;$(TargetFramework.ToUpper())</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;NETSTANDARD;$(TargetFramework.Replace('.', '_').ToUpper())</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="data.json.zip" />

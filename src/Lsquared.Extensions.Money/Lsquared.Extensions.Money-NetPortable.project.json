@@ -1,15 +1,13 @@
 {
-  "supports": {
-    "win": {},
-    "win-x64": {},
-    "win10-x64": {}
-  },
-  "dependencies": {
-    "System.Runtime": "4.1.0",
-    "System.IO.Compression": "4.1.0",
-    "Newtonsoft.Json": "9.0.1"
-  },
-  "frameworks": {
-    ".NETPortable,Version=v4.5,Profile=Profile111": {}
-  }
+    "dependencies": {
+        "System.Runtime": "4.1.0",
+        "System.IO.Compression": "4.1.0",
+        "Newtonsoft.Json": "9.0.1"
+    },
+    "frameworks": {
+        ".NETPortable,Version=v4.5,Profile=Profile111": {}
+    },
+    "runtimes": {
+        "win": {}
+    }
 }
