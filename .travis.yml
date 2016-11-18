@@ -1,4 +1,9 @@
 language: csharp
+mono:
+  - latest
+  - 3.12.0
 solution: Money.sln
+install:
+    - nuget install Newtonsoft.Json 
 script:
     - xbuild /p:Configuration=Release Money.sln
