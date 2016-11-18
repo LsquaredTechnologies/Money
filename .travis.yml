@@ -16,5 +16,7 @@ addons:
 before_install:
     - mkdir .nuget
     - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/v3.5.0/NuGet.exe
+install:
+    - mono .nuget/nuget.exe install Newtonsoft.Json
 script:
     - xbuild /p:Configuration=Release Money.sln
