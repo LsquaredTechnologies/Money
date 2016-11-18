@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+    <metadata>
+        <id>Lsquared.Money</id>
+        <version>1.0.0</version>
+        <authors>Lsquared Technologies,Lionel Lalande</authors>
+        <description>Provides Money and Currency classes for the CLR.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/LsquaredTechnologies/Money</projectUrl>
+        <licenseUrl>https://github.com/LsquaredTechnologies/Money/license</licenseUrl>
+        <dependencies>
+            <group>
+                <dependency id="Newtonsoft.Json" version="9.0.1" />
+            </group>
+            <group targetFramework="portable-net45+win8+wpa81">
+                <dependency id="System.IO.Compression" version="4.1.0" />
+            </group>
+        </dependencies>
+    </metadata>
+</package>
