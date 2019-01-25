@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -327,10 +327,12 @@ namespace Lsquared.GenerateData
         
         private struct Entry : IEquatable<Entry>
         {
+#pragma warning disable IDE1006
             internal readonly short IsoNumber;
             internal readonly string IsoCode;
             internal readonly string Symbol;
             internal readonly string Name;
+#pragma warning restore IDE1006
 
             internal Entry(short isoNumber, string isoCode, string symbol, string name)
             {
