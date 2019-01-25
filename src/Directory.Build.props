@@ -7,11 +7,4 @@
     <RootNamespace>Lsquared.Extensions.OpenAuth</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GitLink" Version="3.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
 </Project>
