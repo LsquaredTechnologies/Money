@@ -4,19 +4,13 @@ using System.Globalization;
 using System.Threading;
 #endif
 
-#if XUNIT
 using Xunit;
-#else
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assert = Xunit.Assert;
-#endif
 
 namespace Lsquared.Extensions
 {
-    [TestClass]
     public class CurrencyTests
     {
-        [TestMethod]
+        [Fact]
         public void Create_WithEuroIsoNumber()
         {
             // Don't need to set culture in current thread.
@@ -26,7 +20,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void Create_WithEuroIsoCode()
         {
             // Don't need to set culture in current thread.
@@ -36,7 +30,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void Create_WithEuroSymbol()
         {
             // Don't need to set culture in current thread.
@@ -46,7 +40,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_EuroName_WithFrenchCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -60,7 +54,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_EuroSymbol_WithSpanishCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -74,7 +68,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_DollarSymbol_WithAmericanCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -88,7 +82,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.USD, dollar);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_DollarSymbol_WithEnglishCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -102,7 +96,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.ARS, dollar); // ! \\ Currency is the first one found if no currency matches the current culture...
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_SterlingPoundSymbol_WithEnglishCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -116,7 +110,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.GBP, pound);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToString_WithEuroCurrency()
         {
             var euro = new Currency(978);
@@ -124,7 +118,7 @@ namespace Lsquared.Extensions
             Assert.Equal("Euro (978)", euro.ToString());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToString_WithNewTurkishLiraCurrency()
         {
             var lira = new Currency(949);
@@ -132,7 +126,7 @@ namespace Lsquared.Extensions
             Assert.Equal("Türk Lirası (949)", lira.ToString());
         }
 
-        [TestMethod]
+        [Fact]
         public void FromCultureInfo_WithFrenchCulture()
         {
             var euro = Currency.FromCulture(new CultureInfo("fr-FR"));
@@ -140,7 +134,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void FromCultureInfo_WithSpanishCulture()
         {
             var euro = Currency.FromCulture(new CultureInfo("es-ES"));
@@ -148,7 +142,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, euro);
         }
 
-        [TestMethod]
+        [Fact]
         public void FromCultureInfo_WithEnglishCulture()
         {
             var pound = Currency.FromCulture(new CultureInfo("en-GB"));
@@ -156,7 +150,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.GBP, pound);
         }
 
-        [TestMethod]
+        [Fact]
         public void FromCultureInfo_WithAmericanCulture()
         {
             var dollar = Currency.FromCulture(new CultureInfo("en-US"));
@@ -164,7 +158,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.USD, dollar);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFormat_WithFrenchCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0
@@ -179,7 +173,7 @@ namespace Lsquared.Extensions
             Assert.Equal("12,35 €", actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFormat_WithAmericanCulture()
         {
 #if NETSTANDARD1_6 || NETCOREAPP1_0

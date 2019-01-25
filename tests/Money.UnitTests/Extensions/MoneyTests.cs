@@ -5,19 +5,13 @@ using System.Globalization;
 using System.Threading;
 #endif
 
-#if XUNIT
 using Xunit;
-#else
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assert = Xunit.Assert;
-#endif
 
 namespace Lsquared.Extensions
 {
-    [TestClass]
     public class MoneyTests
     {
-        [TestMethod]
+        [Fact]
         public void Create_WithEuroCurrency()
         {
             // Don't need to set culture in current thread.
@@ -27,7 +21,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12.35m, value.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_SameCurrency()
         {
             // Don't need to set culture in current thread.
@@ -40,7 +34,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_WithZero()
         {
             // Don't need to set culture in current thread.
@@ -52,7 +46,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_FromZero()
         {
             // Don't need to set culture in current thread.
@@ -64,7 +58,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_WithInt32()
         {
             // Don't need to set culture in current thread.
@@ -76,7 +70,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_WithInt64()
         {
             // Don't need to set culture in current thread.
@@ -88,7 +82,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_WithDecimal()
         {
             // Don't need to set culture in current thread.
@@ -100,7 +94,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Add_DifferenctCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -111,7 +105,7 @@ namespace Lsquared.Extensions
             Assert.Throws<InvalidOperationException>(() => a + b);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_SameCurrency()
         {
             // Don't need to set culture in current thread.
@@ -124,7 +118,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_WithZero()
         {
             // Don't need to set culture in current thread.
@@ -136,7 +130,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_FromZero()
         {
             // Don't need to set culture in current thread.
@@ -148,7 +142,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_WithInt32()
         {
             // Don't need to set culture in current thread.
@@ -160,7 +154,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_WithInt64()
         {
             // Don't need to set culture in current thread.
@@ -172,7 +166,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_WithDecimal()
         {
             // Don't need to set culture in current thread.
@@ -184,7 +178,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Subtract_DifferenctCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -195,7 +189,7 @@ namespace Lsquared.Extensions
             Assert.Throws<InvalidOperationException>(() => a - b);
         }
 
-        [TestMethod]
+        [Fact]
         public void Multiply_WithInt32()
         {
             // Don't need to set culture in current thread.
@@ -207,7 +201,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Multiply_WithInt64()
         {
             // Don't need to set culture in current thread.
@@ -219,7 +213,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Multiply_WithDecimal()
         {
             // Don't need to set culture in current thread.
@@ -231,7 +225,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Divide_WithInt32()
         {
             // Don't need to set culture in current thread.
@@ -243,7 +237,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Divide_WithInt64()
         {
             // Don't need to set culture in current thread.
@@ -255,7 +249,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Divide_WithDecimal()
         {
             // Don't need to set culture in current thread.
@@ -267,31 +261,31 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, actual.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithBadValue()
         {
             Assert.Throws<FormatException>(() => Money.Parse("ABC"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithNull()
         {
             Assert.Throws<FormatException>(() => Money.Parse(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithEmptyString()
         {
             Assert.Throws<FormatException>(() => Money.Parse(string.Empty));
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithBadValueAndCultureInfo()
         {
             Assert.Throws<FormatException>(() => Money.Parse("ABC", new CultureInfo("fr-FR")));
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithEuroAndFrenchCulture()
         {
             var money = Money.Parse("3,23 €", new CultureInfo("fr-FR"));
@@ -300,7 +294,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.EUR, money.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithPoundAndBritishCulture()
         {
             var money = Money.Parse("£3.23", new CultureInfo("en-GB"));
@@ -309,7 +303,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.GBP, money.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void Parse_WithDollarAndAmericanCulture()
         {
             var money = Money.Parse("$3.23", new CultureInfo("en-US"));
@@ -318,7 +312,7 @@ namespace Lsquared.Extensions
             Assert.Equal(Currency.USD, money.Currency);
         }
 
-        [TestMethod]
+        [Fact]
         public void CompareTo_WithObject()
         {
             // Don't need to set culture in current thread.
@@ -327,7 +321,7 @@ namespace Lsquared.Extensions
             Assert.Throws<NotSupportedException>(() => a.CompareTo(new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CompareTo_WithMoneyAsObject()
         {
             // Don't need to set culture in current thread.
@@ -339,7 +333,7 @@ namespace Lsquared.Extensions
             Assert.Equal(0, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void CompareTo_WithMoney()
         {
             // Don't need to set culture in current thread.
@@ -352,7 +346,7 @@ namespace Lsquared.Extensions
             Assert.Equal(0, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void CompareTo_WithDifferentCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -363,7 +357,7 @@ namespace Lsquared.Extensions
             Assert.Throws<InvalidOperationException>(() => a.CompareTo(b));
         }
 
-        [TestMethod]
+        [Fact]
         public void Equals_WithObject()
         {
             // Don't need to set culture in current thread.
@@ -371,10 +365,10 @@ namespace Lsquared.Extensions
             var money = new Money(12.35m, Currency.EUR);
             var actual = money.Equals(new object());
 
-            Assert.Equal(false, actual);
+            Assert.False(actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void Equals_WithMoneyAsObject()
         {
             // Don't need to set culture in current thread.
@@ -384,10 +378,10 @@ namespace Lsquared.Extensions
 
             var actual = money1.Equals((object)money2);
 
-            Assert.Equal(true, actual);
+            Assert.True(actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void Equals_WithMoney()
         {
             // Don't need to set culture in current thread.
@@ -397,10 +391,10 @@ namespace Lsquared.Extensions
 
             var actual = money1.Equals(money2);
 
-            Assert.Equal(true, actual);
+            Assert.True(actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void Equals_WithDifferentCurrencies()
         {
             // Don't need to set culture in current thread.
@@ -410,10 +404,10 @@ namespace Lsquared.Extensions
 
             var actual = money1.Equals(money2);
 
-            Assert.Equal(false, actual);
+            Assert.False(actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToString_WithFormat()
         {
             // Don't need to set culture in current thread.
@@ -425,7 +419,7 @@ namespace Lsquared.Extensions
             Assert.Equal("12,35 €", actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToBoolean()
         {
             // Don't need to set culture in current thread.
@@ -435,7 +429,7 @@ namespace Lsquared.Extensions
             Assert.Throws<NotSupportedException>(() => money.ToBoolean(new CultureInfo("fr-FR")));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToByte()
         {
             // Don't need to set culture in current thread.
@@ -447,7 +441,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToChar()
         {
             // Don't need to set culture in current thread.
@@ -457,7 +451,7 @@ namespace Lsquared.Extensions
             Assert.Throws<NotSupportedException>(() => money.ToChar(new CultureInfo("fr-FR")));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToDateTime()
         {
             // Don't need to set culture in current thread.
@@ -467,7 +461,7 @@ namespace Lsquared.Extensions
             Assert.Throws<NotSupportedException>(() => money.ToDateTime(new CultureInfo("fr-FR")));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToDecimal()
         {
             // Don't need to set culture in current thread.
@@ -479,7 +473,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12.35m, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToDouble()
         {
             // Don't need to set culture in current thread.
@@ -491,7 +485,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12.35, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToInt16()
         {
             // Don't need to set culture in current thread.
@@ -503,7 +497,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToInt32()
         {
             // Don't need to set culture in current thread.
@@ -515,7 +509,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToInt64()
         {
             // Don't need to set culture in current thread.
@@ -527,7 +521,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToSByte()
         {
             // Don't need to set culture in current thread.
@@ -539,7 +533,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToSingle()
         {
             // Don't need to set culture in current thread.
@@ -551,7 +545,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12.35f, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToType()
         {
             // Don't need to set culture in current thread.
@@ -561,7 +555,7 @@ namespace Lsquared.Extensions
             Assert.Throws<NotSupportedException>(() => money.ToType(typeof(object), new CultureInfo("fr-FR")));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToUInt16()
         {
             // Don't need to set culture in current thread.
@@ -573,7 +567,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12U, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToUInt32()
         {
             // Don't need to set culture in current thread.
@@ -585,7 +579,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12U, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToUInt64()
         {
             // Don't need to set culture in current thread.
@@ -597,7 +591,7 @@ namespace Lsquared.Extensions
             Assert.Equal(12UL, actual);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTypeCode()
         {
             // Don't need to set culture in current thread.
