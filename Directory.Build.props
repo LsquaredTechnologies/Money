@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="build\Sources.props" />
+
+  <PropertyGroup>
+    <RootNamespace>Lsquared.Extensions</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Legal information">
+    <Product>Lsquared Money extensions</Product>
+    <Authors>LionelL</Authors>
+    <Company>Lsquared Technologies</Company>
+    <Copyright>© Lsquared Technologies. All rights reserved.</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Warnings and errors">
+    <NoWarn>$(NoWarn);NU5105;NU5125</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Packaging">
+    <Description>Contains Money and Currency implementations for .Net.</Description>
+    <Keyword>money;currency</Keyword>
+    <PackageIconUrl>
+      <!-- TODO -->
+    </PackageIconUrl>
+    <PackageProjectUrl>
+      <!-- Put README.md url here -->
+    </PackageProjectUrl>
+    <IncludeSource>false</IncludeSource>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Source code">
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <RepositoryUrl>https://github.com/LsquaredTechnologies/Money</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <SharedSourceRoot>$(MSBuildThisFileDirectory)src\Shared\</SharedSourceRoot>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Compilation common options">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <!-- Instructs the compiler to use SHA256 instead of SHA1 when adding file hashes to PDBs. -->
+    <ChecksumAlgorithm>SHA256</ChecksumAlgorithm>
+    <!-- Fixes a common error in targets implementing a NoBuild mode. -->
+    <BuildProjectReferences Condition=" '$(NoBuild)' == 'true' ">false</BuildProjectReferences>
+  </PropertyGroup>
+
+  <!-- Defines project type conventions. -->
+  <PropertyGroup>
+    <RepoRelativeProjectDir>$([MSBuild]::MakeRelative($(RepositoryRoot), $(MSBuildProjectDirectory)))</RepoRelativeProjectDir>
+    <IsBenchmarkProject Condition="$(RepoRelativeProjectDir.Contains('bench')) OR $(MSBuildProjectName.EndsWith('.Benchmarks'))">true</IsBenchmarkProject>
+    <IsTestProject Condition="$(RepoRelativeProjectDir.Contains('tests')) OR $(MSBuildProjectName.EndsWith('Tests'))">true</IsTestProject>
+    <IsSampleProject Condition="$(RepoRelativeProjectDir.Contains('sample'))">true</IsSampleProject>
+  </PropertyGroup>
+
+</Project>

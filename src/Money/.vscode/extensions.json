@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-vscode.csharp",
+    "ms-vscode.PowerShell",
+    "ms-vsliveshare.vsliveshare-pack",
+    "EditorConfig.EditorConfig",
+    "jchannon.csharpextensions",
+    "jmrog.vscode-nuget-package-manager"
+  ]
+}

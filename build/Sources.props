@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="$(DotNetRestoreSourcePropsPath)" Condition="'$(DotNetRestoreSourcePropsPath)' != ''"/>
+
+  <PropertyGroup>
+    <RestoreSources>
+      $(DotNetAdditionalRestoreSources);
+      $(DotNetRestoreSources);
+    </RestoreSources>
+  </PropertyGroup>
+
+</Project>

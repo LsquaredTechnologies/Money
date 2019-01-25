@@ -1,22 +1,23 @@
 language: csharp
-mono:
-  - latest
+mono: latest
+dotnet: 2.1.502
+
 solution: Money.sln
+
 addons:
     apt:
         sources:
-            - sourceline: 'deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main'
             #- sourceline: 'deb http://download.mono-project.com/repo/debian wheezy main'
             - sourceline: 'deb http://download.mono-project.com/repo/debian beta main'
         packages:
             - mono-devel
-            - mono-complete
-            - referenceassemblies-pcl
-            - dotnet-dev-1.0.0-preview2-1-003177
-before_install:
-    - mkdir .nuget
-    - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/v3.5.0/NuGet.exe
+            #- mono-complete
+
 install:
-    - mono .nuget/nuget.exe install Newtonsoft.Json
+- dotnet restore Money.sln
 script:
-    - xbuild /p:Configuration=Release Money.sln
+- xbuild /p:Configuration=Release tools/DataGenerator/DataGenerator.csproj
+- mono tools/DataGenerator/bin/Release/Lsquared.GenerateData.exe
+- mv -f data.json.zip src/Money/
+- dotnet build --no-restore -c Release src/Money/Money.csproj
+- dotnet test --no-restore --collect "Code Coverage" -c Release tests/Money.UnitTests/Money.UnitTests.csproj

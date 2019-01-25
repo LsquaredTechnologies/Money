@@ -7,7 +7,7 @@
         <description>Provides Money and Currency classes for the CLR.</description>
         <language>en-US</language>
         <projectUrl>https:\\github.com\LsquaredTechnologies\Money</projectUrl>
-        <licenseUrl>https:\\github.com\LsquaredTechnologies\Money\license</licenseUrl>
+        <licenseUrl>https:\\github.com\LsquaredTechnologies\Money\LICENSE</licenseUrl>
         <dependencies>
             <group>
                 <dependency id="Newtonsoft.Json" version="9.0.1" />
