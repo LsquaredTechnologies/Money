@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading;
 
 namespace Lsquared.Extensions
 {
@@ -13,6 +14,6 @@ namespace Lsquared.Extensions
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
         private string DebuggerDisplay
-            => $"{ToString()} ({ToDecimal(CultureInfo.CurrentCulture)} {(_currency == Currency.None ? "<No currency>" : _currency.Name)})";
+            => $"{ToString()} ({ToDecimal(Thread.CurrentThread.CurrentCulture.NumberFormat)} {(_currency == Currency.None ? "<No currency>" : _currency.Name)})";
     }
 }

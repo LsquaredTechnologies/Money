@@ -191,9 +191,9 @@ namespace Lsquared.Extensions
         private static void ReadEntries()
         {
 #if NET20 || NET35 || NET40
-            using (var stream = typeof(Money).Assembly.GetManifestResourceStream(@"Lsquared.Extensions.OpenAuth.data.json.zip"))
+            using (var stream = typeof(Money).Assembly.GetManifestResourceStream(@"Lsquared.Extensions.data.json.zip"))
 #else
-            using (var stream = typeof(Money).GetTypeInfo().Assembly.GetManifestResourceStream(@"Lsquared.Extensions.OpenAuth.data.json.zip"))
+            using (var stream = typeof(Money).GetTypeInfo().Assembly.GetManifestResourceStream(@"Lsquared.Extensions.data.json.zip"))
 #endif
             using (var gzip = new GZipStream(stream, CompressionMode.Decompress))
             using (var reader = new StreamReader(gzip, Encoding.UTF8, false, 1000))

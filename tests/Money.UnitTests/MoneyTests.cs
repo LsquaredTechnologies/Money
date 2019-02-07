@@ -602,5 +602,38 @@ namespace Lsquared.Extensions
 
             Assert.Equal(TypeCode.Object, actual);
         }
+
+        [Fact]
+        public void Cast_FromInt32()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            Money money = 12;
+
+            Assert.Equal(Currency.EUR, money.Currency);
+            Assert.Equal(12m, money.Value);
+        }
+
+        [Fact]
+        public void Cast_FromInt64()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            Money money = 12L;
+
+            Assert.Equal(Currency.EUR, money.Currency);
+            Assert.Equal(12m, money.Value);
+        }
+
+        [Fact]
+        public void Cast_FromDecimal()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            Money money = 12.35m;
+
+            Assert.Equal(Currency.EUR, money.Currency);
+            Assert.Equal(12.35m, money.Value);
+        }
     }
 }

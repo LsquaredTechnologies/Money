@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Threading;
 
 namespace Lsquared.Extensions
 {
@@ -23,7 +24,8 @@ namespace Lsquared.Extensions
 #endif
         public static implicit operator Money(int value)
         {
-            return new Money(value, Currency.None);
+            var currency = Currency.FromCulture(Thread.CurrentThread.CurrentCulture);
+            return new Money(value, currency);
         }
 
         /// <summary>
@@ -38,11 +40,12 @@ namespace Lsquared.Extensions
 #endif
         public static implicit operator Money(long value)
         {
-            return new Money(value, Currency.None);
+            var currency = Currency.FromCulture(Thread.CurrentThread.CurrentCulture);
+            return new Money(value, currency);
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Decimal"/> to <see cref="Money"/>.
+        /// Performs an implicit conversion from <see cref="System.Decimal"/> to <see cref="Money"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
@@ -51,13 +54,14 @@ namespace Lsquared.Extensions
 #if !(NET20 || NET35 || NETSTANDARD1_3 || UAP10)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public static explicit operator Money(decimal value)
+        public static implicit operator Money(decimal value)
         {
-            return new Money(value, Currency.None);
+            var currency = Currency.FromCulture(Thread.CurrentThread.CurrentCulture);
+            return new Money(value, currency);
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Money"/> to <see cref="System.Decimal"/>.
+        /// Performs an explicit conversion from <see cref="Money"/> to <see cref="System.Decimal"/>.
         /// </summary>
         /// <param name="money">The money.</param>
         /// <returns>
@@ -66,10 +70,11 @@ namespace Lsquared.Extensions
 #if !(NET20 || NET35 || NETSTANDARD1_3 || UAP10)
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public static implicit operator decimal(Money money)
+        public static explicit operator decimal(Money money)
         {
             return money.Value;
         }
+
 #if !PORTABLE
         /// <inheritdoc />
         public TypeCode GetTypeCode()

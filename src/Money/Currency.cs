@@ -25,7 +25,7 @@ namespace Lsquared.Extensions
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
         public static Currency CurrentCurrency
-            => FromCulture(CultureInfo.CurrentCulture);
+            => FromCulture(Thread.CurrentThread.CurrentCulture);
 
         /// <summary>
         /// Gets the name.
@@ -109,7 +109,7 @@ namespace Lsquared.Extensions
         public static Currency Parse(string isoCodeOrSymbol)
         {
             Currency currency;
-            if (TryParse(isoCodeOrSymbol, CultureInfo.CurrentCulture, out currency))
+            if (TryParse(isoCodeOrSymbol, Thread.CurrentThread.CurrentCulture, out currency))
                 return currency;
 
             throw new FormatException($"Cannot parse currency: {isoCodeOrSymbol}");
@@ -143,7 +143,7 @@ namespace Lsquared.Extensions
         /// </returns>
         public static bool TryParse(string isoCodeOrSymbol, out Currency currency)
         {
-            return TryParse(isoCodeOrSymbol, CultureInfo.CurrentCulture, out currency);
+            return TryParse(isoCodeOrSymbol, Thread.CurrentThread.CurrentCulture, out currency);
         }
 
         /// <summary>

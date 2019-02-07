@@ -15,5 +15,6 @@
   <InheritXmlSettings>True</InheritXmlSettings>
   <IgnoredWords>
     <Ignore>Lsquared</Ignore>
+    <Ignore>timestamp</Ignore>
   </IgnoredWords>
 </SpellCheckerConfiguration>

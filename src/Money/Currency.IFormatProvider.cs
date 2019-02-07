@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Globalization;
+using System.Threading;
 
 namespace Lsquared.Extensions
 {
@@ -16,8 +17,8 @@ namespace Lsquared.Extensions
 
             var names = _isoNumberToName[_isoNumber];
 
-            var name = names.Contains(CultureInfo.CurrentCulture.Name) ?
-                             CultureInfo.CurrentCulture.Name : 
+            var name = names.Contains(Thread.CurrentThread.CurrentCulture.Name) ?
+                             Thread.CurrentThread.CurrentCulture.Name : 
                              names[0];
 
             return new CultureInfo(name).NumberFormat;
