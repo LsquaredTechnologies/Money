@@ -20,4 +20,4 @@ script:
 - mono tools/DataGenerator/bin/Release/Lsquared.GenerateData.exe
 - mv -f data.json.zip src/Money/
 - dotnet build --no-restore -c Release src/Money/Money.csproj
-- dotnet test --no-restore --collect "Code Coverage" -c Release tests/Money.UnitTests/Money.UnitTests.csproj
+- dotnet test --no-restore -c Release tests/Money.UnitTests/Money.UnitTests.csproj
