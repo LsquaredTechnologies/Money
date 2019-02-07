@@ -1,5 +1,7 @@
 # Money & Currency
 
+[![Build status](https://lsquared.visualstudio.com/Money/_apis/build/status/Build%20and%20publish)](https://lsquared.visualstudio.com/Money/_build/latest?definitionId=2)
+
 ## Documentation
 
 ### Currency

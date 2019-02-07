@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Packaging">
+    <Version>1.0.1</Version>
     <Description>Contains Money and Currency implementations for .Net.</Description>
     <Keyword>money;currency</Keyword>
     <PackageIconUrl>
