@@ -3,7 +3,7 @@ image: Visual Studio 2019
 
 build_script:
 - ps: >-
-    nuget restore tools\DataGenerator\DataGenerator.csproj
+    nuget restore .\Money.sln
     msbuild /p:Configuration=Release tools\DataGenerator\DataGenerator.csproj
     tools\DataGenerator\bin\Release\Lsquared.GenerateData.exe
     Move-Item -Path .\data.json.zip -Destination .\src\Money\ -Force
