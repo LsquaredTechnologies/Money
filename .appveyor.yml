@@ -20,11 +20,11 @@ test_script:
 - ps: dotnet restore .\tests\Money.UnitTests\Money.UnitTests.csproj
 - ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
 
+after_test:
+- ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
+
 artifacts:
 - path: .\*.nupkg
-
-before_deploy:
-- ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
 
 deploy:
 - provider: NuGet
