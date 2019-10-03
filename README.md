@@ -1,6 +1,9 @@
 # Money & Currency
 
 [![Build status](https://lsquared.visualstudio.com/Money/_apis/build/status/Build%20and%20publish)](https://lsquared.visualstudio.com/Money/_build/latest?definitionId=2)
+[![Build status](https://ci.appveyor.com/api/projects/status/6sew9s495hjd8h0d?svg=true)](https://ci.appveyor.com/project/LionelLalande/money)
+[![Coverage Status](https://coveralls.io/repos/github/LsquaredTechnologies/Money/badge.svg?branch=master)](https://coveralls.io/github/LsquaredTechnologies/Money?branch=master)
+[![NuGet version](https://badge.fury.io/nu/Lsquared.Extensions.money.svg)](https://badge.fury.io/nu/Lsquared.Extensions.money)
 
 ## Documentation
 
