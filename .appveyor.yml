@@ -1,0 +1,36 @@
+version: '{build}'
+
+image: Visual Studio 2019
+
+nuget:
+  disable_publish_on_pr: true
+  
+init:
+
+install:
+
+before_build:
+- ps: dotnet restore Money.sln
+
+build_script:
+- ps: msbuild /p:Configuration=Release tools\DataGenerator\DataGenerator.csproj
+- ps: tools\DataGenerator\bin\Release\Lsquared.GenerateData.exe
+- ps: Move-Item -Path .\data.json.zip -Destination .\src\Money\ -Force
+- ps: dotnet restore .\src\Money\Money.csproj
+- ps: dotnet build --no-restore -c Release .\src\Money\Money.csproj
+
+test_script:
+- ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
+
+before_deploy:
+- ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
+
+artifacts:
+- path: '.\*.nupkg'
+  
+deploy:
+- provider: NuGet
+  skip_symbols: false
+  api_key:
+    secure: oy2kq2ssgzpjtmfhdgfansg27n432pguleo3mnnq5d7zcu
+    
