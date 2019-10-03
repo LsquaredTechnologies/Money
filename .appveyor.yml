@@ -1,11 +1,18 @@
 version: 1.0.{build}
 image: Visual Studio 2019
 
+environment:
+  COVERALLS_TOKEN:
+    secure: Nh3Pu07gGytJs+v1tU37B0K89DiUO76O+wj0Scvw5koSv+Bhva0jGdDbnJfssU/H
+    
 init:
 - ps: git config --global core.autocrlf true
 
 before_build:
 - ps: dotnet --version
+- ps: nuget install xunit.runner.console -OutputDirectory packages -Version 2.3.1
+- ps: nuget install OpenCover -OutputDirectory packages -Version 4.6.166
+- ps: dotnet tool install coveralls.net --version 1.0.0-beta0002 --tool-path tools
 
 build_script:
 - ps: nuget restore .\Money.sln
@@ -15,13 +22,27 @@ build_script:
 - ps: dotnet restore .\src\Money\Money.csproj
 - ps: dotnet restore .\src\Money\Money.csproj
 - ps: dotnet build --no-restore -c Release .\src\Money\Money.csproj
+- ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
 
 test_script:
 - ps: dotnet restore .\tests\Money.UnitTests\Money.UnitTests.csproj
-- ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
-
-after_test:
-- ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
+#- ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
+- ps: >-
+    .\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe
+    -register:user
+    -target:dotnet.exe
+    "-targetargs:"".\packages\xunit.runner.console.2.3.1\tools\netcoreapp2.0\xunit.console.dll""
+    "".\tests\Money.UnitTests\bin\Release\netcoreapp2.0\Money.UnitTests.dll""
+    -noshadow
+    -appveyor"
+    -filter:"+[Money*]*"
+    -oldStyle
+    -output:opencoverCoverage.xml
+- ps: >-
+    .\tools\csmacnz.coveralls.exe
+    --opencover
+    -i opencoverCoverage.xml
+    --repoToken $env:COVERALLS_TOKEN
 
 artifacts:
 - path: .\*.nupkg
