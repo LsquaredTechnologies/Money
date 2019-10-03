@@ -1,36 +1,30 @@
-version: '1.0.{build}'
-
+version: 1.0.{build}
 image: Visual Studio 2019
 
-nuget:
-  disable_publish_on_pr: true
-  
-init:
-
-install:
-
 build_script:
-- ps: nuget restore tools\DataGenerator\DataGenerator.csproj
-- ps: msbuild /p:Configuration=Release tools\DataGenerator\DataGenerator.csproj
-- ps: tools\DataGenerator\bin\Release\Lsquared.GenerateData.exe
-- ps: Move-Item -Path .\data.json.zip -Destination .\src\Money\ -Force
-- ps: dotnet restore .\src\Money\Money.csproj
-- ps: dotnet restore .\src\Money\Money.csproj
-- ps: dotnet build --no-restore -c Release .\src\Money\Money.csproj
+- ps: >-
+    nuget restore tools\DataGenerator\DataGenerator.csproj
+    msbuild /p:Configuration=Release tools\DataGenerator\DataGenerator.csproj
+    tools\DataGenerator\bin\Release\Lsquared.GenerateData.exe
+    Move-Item -Path .\data.json.zip -Destination .\src\Money\ -Force
+    dotnet restore .\src\Money\Money.csproj
+    dotnet restore .\src\Money\Money.csproj
+    dotnet build --no-restore -c Release .\src\Money\Money.csproj
 
 test_script:
-- ps: dotnet restore .\tests\Money.UnitTests\Money.UnitTests.csproj
-- ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
+- ps: >-
+    dotnet restore .\tests\Money.UnitTests\Money.UnitTests.csproj
+    dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
+
+artifacts:
+- path: .\*.nupkg
 
 before_deploy:
 - ps: dotnet pack --no-restore --no-build --include-symbols -o . -c Release .\src\Money\Money.csproj
 
-artifacts:
-- path: '.\*.nupkg'
-  
 deploy:
 - provider: NuGet
-  skip_symbols: false
   api_key:
-    secure: oy2kq2ssgzpjtmfhdgfansg27n432pguleo3mnnq5d7zcu
-    
+    secure: baP1EKFns7P4lsmSh8d3avOmkW00zEzJX+2xTx9593RQagLkmQ3n25V2XvlTlJGI
+  skip_symbols: false
+  
