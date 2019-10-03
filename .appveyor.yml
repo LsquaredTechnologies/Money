@@ -29,15 +29,12 @@ test_script:
 #- ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
 - ps: >-
     .\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe
-    -register:user
     -target:dotnet.exe
-    "-targetargs:"".\packages\xunit.runner.console.2.3.1\tools\netcoreapp2.0\xunit.console.dll""
-    "".\tests\Money.UnitTests\bin\Release\netcoreapp2.0\Money.UnitTests.dll""
-    -noshadow
-    -appveyor"
-    -filter:"+[Money*]*"
-    -oldStyle
+    -targetargs:"test --no-restore -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj"
+    -filter:"+[Lsquared*]*"
+    -register:user
     -output:opencoverCoverage.xml
+    -oldStyle
 - ps: >-
     .\tools\csmacnz.coveralls.exe
     --opencover
