@@ -9,17 +9,17 @@ init:
 
 install:
 
-before_build:
-- ps: dotnet restore Money.sln
-
 build_script:
+- ps: nuget restore tools\DataGenerator\DataGenerator.csproj
 - ps: msbuild /p:Configuration=Release tools\DataGenerator\DataGenerator.csproj
 - ps: tools\DataGenerator\bin\Release\Lsquared.GenerateData.exe
 - ps: Move-Item -Path .\data.json.zip -Destination .\src\Money\ -Force
 - ps: dotnet restore .\src\Money\Money.csproj
+- ps: dotnet restore .\src\Money\Money.csproj
 - ps: dotnet build --no-restore -c Release .\src\Money\Money.csproj
 
 test_script:
+- ps: dotnet restore .\tests\Money.UnitTests\Money.UnitTests.csproj
 - ps: dotnet test --no-restore --collect "Code Coverage" -c Release .\tests\Money.UnitTests\Money.UnitTests.csproj
 
 before_deploy:
